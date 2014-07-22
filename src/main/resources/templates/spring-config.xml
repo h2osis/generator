@@ -17,6 +17,4 @@
        <property name="wsdl" value="/WEB-INF/config/Service.wsdl"/>
     </bean>
 
-
-
 </beans>

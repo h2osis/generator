@@ -47,9 +47,9 @@ public class Main {
 
 		try {
 			gen.generate(src, out, typesPackage);
-			genSpring.generate(out, serviceName, "com.service");
+			genSpring.generate(out, serviceName, "com");
 			wsdlPr.process(wsdl, out, serviceName);
-			pomPr.process(out, serviceName, "banana.services");
+			pomPr.process(out, serviceName, "banana.services", "natashaCall-0.0.1-SNAPSHOT"); //4th should be setted for addressing to the server
 			endP.generateEnpointClass(out, wsdl, "com\\h2osis\\endpoints", "com\\h2osis\\service", serviceName, typesPackage, nameSpace, operations);
 			implGen.generate(out, "com\\h2osis\\service", serviceName, operations, typesPackage);
 		} catch (IOException e) {

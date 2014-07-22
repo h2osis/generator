@@ -50,7 +50,6 @@ public class SpringWSImplGenerator {
 
 		DOMSource sourceSpringConfig = new DOMSource(doc);
 		result = new StreamResult(new File(springconfig.getAbsolutePath() + "\\spring-config.xml"));
-
 		transformer.transform(sourceSpringConfig, result);
 		System.out.println(springconfig.getAbsolutePath() + "\\spring-config.xml");
 

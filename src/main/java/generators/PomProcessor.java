@@ -18,35 +18,29 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class PomProcessor {
-	
-	public Map<String, Object> process(String outDir, String serviceName, String groupId) throws TransformerException, ParserConfigurationException, SAXException, IOException{
-		Map<String,Object> res = new HashMap<String, Object>();
-		
+
+	public Map<String, Object> process(String outDir, String serviceName, String groupId, String warName) throws TransformerException, ParserConfigurationException, SAXException, IOException {
+		Map<String, Object> res = new HashMap<String, Object>();
+
 		File pom = new File(outDir);
 		pom.mkdirs();
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
-		Document doc = db.parse(new File(
-				"src\\main\\resources\\templates\\pom.xml"));
-		
-		
+		Document doc = db.parse(new File("src\\main\\resources\\templates\\pom.xml"));
+
 		doc.getElementsByTagName("groupId").item(0).setTextContent(groupId);
 		doc.getElementsByTagName("artifactId").item(0).setTextContent(serviceName);
-		
+		doc.getElementsByTagName("warName").item(0).setTextContent(warName);
 
-		TransformerFactory transformerFactory = TransformerFactory
-				.newInstance();
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource sourcepom = new DOMSource(doc);
-		StreamResult result = new StreamResult(new File(
-				pom.getAbsolutePath() + "\\pom.xml"));
-		
+		StreamResult result = new StreamResult(new File(pom.getAbsolutePath() + "\\pom.xml"));
 
 		transformer.transform(sourcepom, result);
-		System.out.println(pom.getAbsolutePath() + "\\"+serviceName+".wsdl");
-		
-		
+		System.out.println(pom.getAbsolutePath() + "\\" + serviceName + ".wsdl");
+
 		return res;
 	}
 
